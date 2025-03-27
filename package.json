@@ -1,0 +1,20 @@
+{
+  "name": "arab-violence-reporting-bot",
+  "version": "1.0.0",
+  "description": "A Twitter bot that creates daily posts about incidents of violence in Arab countries",
+  "main": "bot.js",
+  "scripts": {
+    "start": "node bot.js",
+    "schedule": "node schedule_bot.js"
+  },
+  "dependencies": {
+    "axios": "^1.6.0",
+    "date-fns": "^2.30.0",
+    "dotenv": "^16.3.1",
+    "node-schedule": "^2.1.1",
+    "twitter-api-v2": "^1.15.1"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+} 

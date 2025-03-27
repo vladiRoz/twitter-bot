@@ -1,0 +1,20 @@
+{
+  "date": "2023-06-10",
+  "countries": [
+    {
+      "country": "Yemen",
+      "death_toll": 12,
+      "summary": "Fighting between Houthi rebels and government forces in Marib province resulted in 12 casualties. The conflict escalated after a failed ceasefire attempt."
+    },
+    {
+      "country": "Syria",
+      "death_toll": 5,
+      "summary": "Five people were killed in clashes between rival armed groups in Idlib province, according to local sources."
+    },
+    {
+      "country": "Iraq",
+      "death_toll": "unknown",
+      "summary": "Reports of violence in Baghdad's southern districts, with multiple explosions heard overnight. Casualty numbers remain unconfirmed."
+    }
+  ]
+} 
