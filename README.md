@@ -1,6 +1,3 @@
-<!-- create repo -->
-
-
 # Arab Violence Reporting Bot
 
 A Twitter bot that creates daily posts about incidents of violence in Arab countries, using data gathered through the OpenAI API.
