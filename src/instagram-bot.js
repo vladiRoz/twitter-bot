@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const { getViolenceData, logger } = require('./services/openai');
+const { getViolenceData, logger } = require('./services/gemini');
 const instagramService = require('./services/instagram');
 
 // Save report to file
@@ -24,7 +24,7 @@ function saveJsonReport(data) {
 // Main function
 async function main() {
   try {
-    logger.info("Starting violence data collection");
+    logger.info("Starting violence data collection using Gemini");
     const violenceData = await getViolenceData();
 
     // Log the complete data object
@@ -38,12 +38,12 @@ async function main() {
     // Save the data to a JSON file
     saveJsonReport(violenceData);
     
-    // Only post to Instagram if there are no errors in the data
-    if (!violenceData.error) {
+    // Only post to Instagram if there are incidents reported and no errors
+    if (!violenceData.error && violenceData.countries && violenceData.countries.length > 0) {
       logger.info("Posting to Instagram");
       await instagramService.postToInstagram(violenceData);
     } else {
-      logger.error("Skipping Instagram post due to errors in the data");
+      logger.info("Skipping Instagram post due to no data or errors");
     }
     
     logger.info("Bot run completed successfully");

@@ -3,12 +3,11 @@ const dotenv = require('dotenv');
 const fs = require('fs');
 const path = require('path');
 const FormData = require('form-data');
-const { logger } = require('./openai');
-const { formatMessage } = require('../utils/messageFormatter');
+const { logger } = require('../utils/logger');
 const imageUtils = require('../utils/imageUtils');
 
-// Load environment variables
-dotenv.config();
+// Load environment variables from the root directory
+dotenv.config({ path: path.resolve(__dirname, '../../.env') });
 
 // Get API credentials from environment
 const INSTAGRAM_BUSINESS_ACCOUNT_ID = process.env.INSTAGRAM_BUSINESS_ACCOUNT_ID;
@@ -17,6 +16,7 @@ const FACEBOOK_ACCESS_TOKEN = process.env.FACEBOOK_ACCESS_TOKEN;
 class InstagramService {
   constructor() {
     this.baseUrl = 'https://graph.facebook.com/v18.0';
+    logger.info(`Instagram service initialized with account ID: ${INSTAGRAM_BUSINESS_ACCOUNT_ID ? (INSTAGRAM_BUSINESS_ACCOUNT_ID.substring(0, 5) + '...') : 'undefined'}`);
   }
 
   async createMediaContainer(imageUrl, caption) {
@@ -32,10 +32,11 @@ class InstagramService {
 
       return response.data.id;
     } catch (error) {
-      logger.error('Error creating media container:', {
-        message: error.message,
-        response: error.response?.data
-      });
+      logger.error('Error creating media container:', error.message);
+      if (error.response) {
+        logger.error(`API response status: ${error.response.status}`);
+        logger.error(`API response data: ${JSON.stringify(error.response.data)}`);
+      }
       throw error;
     }
   }
@@ -52,12 +53,30 @@ class InstagramService {
 
       return response.data.id;
     } catch (error) {
-      logger.error('Error publishing media:', {
-        message: error.message,
-        response: error.response?.data
-      });
+      logger.error('Error publishing media:', error.message);
+      if (error.response) {
+        logger.error(`API response status: ${error.response.status}`);
+        logger.error(`API response data: ${JSON.stringify(error.response.data)}`);
+      }
       throw error;
     }
+  }
+
+  generateCaption(data) {
+    let caption = `🔴 Violence Report for ${data.date}\n\n`;
+    
+    if (data.countries && data.countries.length > 0) {
+      data.countries.forEach(country => {
+        const flag = imageUtils.getCountryFlagEmoji(country.country);
+        caption += `${flag} ${country.country}: ${country.death_toll} casualties\n`;
+        caption += `${country.summary}\n\n`;
+      });
+    } else {
+      caption += 'No incidents reported today.';
+    }
+    
+    caption += '\n#ArabViolence #NewsReport #Peace';
+    return caption;
   }
 
   async postToInstagram(data) {
@@ -70,37 +89,39 @@ class InstagramService {
 
       logger.info('Posting to Instagram');
       
-      // Format the message
-      const { full, summary } = formatMessage(data);
-      const message = summary || full;
+      // Generate caption
+      const caption = this.generateCaption(data);
+      logger.info(`Generated caption: ${caption.substring(0, 100)}...`);
 
       // Get a relevant background image from Unsplash
       const backgroundImageUrl = await imageUtils.getRelevantImage(data);
-      logger.info('Got background image from Unsplash:', backgroundImageUrl);
+      logger.info(`Got background image from Unsplash`);
 
-      // Create image with the message and background
-      const imagePath = await imageUtils.createReportImage(message, backgroundImageUrl);
-      logger.info('Created report image:', imagePath);
+      // Create image with the data and background
+      const imagePath = await imageUtils.createReportImage(data, backgroundImageUrl);
+      logger.info(`Created report image`);
 
-      // Create media container with the image URL
-      const mediaContainerId = await this.createMediaContainer(imagePath, message);
-      logger.info('Created media container:', mediaContainerId);
+      // Upload image to ImgBB or a similar service to get a public URL
+      // For now, we're skipping this step and assuming image hosting is set up
+
+      // Create media container with the image path
+      const mediaContainerId = await this.createMediaContainer(imagePath, caption);
+      logger.info(`Created media container: ${mediaContainerId}`);
 
       // Publish the media
       const mediaId = await this.publishMedia(mediaContainerId);
-      logger.info('Successfully published to Instagram:', mediaId);
+      logger.info(`Successfully published to Instagram: ${mediaId}`);
 
       // Clean up the temporary image
       fs.unlinkSync(imagePath);
 
       return mediaId;
     } catch (error) {
-      logger.error('Error posting to Instagram:', {
-        message: error.message,
-        status: error.status,
-        errors: error.errors,
-        response: error.response?.data
-      });
+      logger.error(`Error posting to Instagram: ${error.message}`);
+      if (error.response) {
+        logger.error(`API response status: ${error.response.status}`);
+        logger.error(`API response data: ${JSON.stringify(error.response.data)}`);
+      }
       throw error;
     }
   }
