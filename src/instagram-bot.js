@@ -40,19 +40,22 @@ async function main() {
     
     // Only post to Instagram if there are incidents reported and no errors
     if (!violenceData.error && violenceData.countries && violenceData.countries.length > 0) {
-      logger.info("Posting to Instagram");
       await instagramService.postToInstagram(violenceData);
     } else {
       logger.info("Skipping Instagram post due to no data or errors");
     }
     
     logger.info("Bot run completed successfully");
+    return true;
   } catch (error) {
     logger.error(`Error in main bot execution: ${error.message}`);
+    return false;
   }
 }
 
 // Run the main function if this script is run directly
 if (require.main === module) {
   main();
-} 
+}
+
+module.exports = { main }; 

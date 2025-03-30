@@ -5,6 +5,7 @@ const path = require('path');
 const FormData = require('form-data');
 const { logger } = require('../utils/logger');
 const imageUtils = require('../utils/imageUtils');
+const imgbbUploader = require('../utils/imgbbUploader');
 
 // Load environment variables from the root directory
 dotenv.config({ path: path.resolve(__dirname, '../../.env') });
@@ -86,8 +87,6 @@ class InstagramService {
         logger.info('No incidents reported, skipping Instagram post');
         return null;
       }
-
-      logger.info('Posting to Instagram');
       
       // Generate caption
       const caption = this.generateCaption(data);
@@ -99,13 +98,21 @@ class InstagramService {
 
       // Create image with the data and background
       const imagePath = await imageUtils.createReportImage(data, backgroundImageUrl);
-      logger.info(`Created report image`);
+      logger.info(`Created report image at: ${imagePath}`);
 
-      // Upload image to ImgBB or a similar service to get a public URL
-      // For now, we're skipping this step and assuming image hosting is set up
+      // Upload the image to ImgBB to get a public URL
+      const publicImageUrl = await imgbbUploader.uploadImage(imagePath);
+      logger.info(`Uploaded image to ImgBB: ${publicImageUrl}`);
 
-      // Create media container with the image path
-      const mediaContainerId = await this.createMediaContainer(imagePath, caption);
+      // Check if we have valid Instagram credentials
+      if (!INSTAGRAM_BUSINESS_ACCOUNT_ID || !FACEBOOK_ACCESS_TOKEN) {
+        logger.info('Instagram credentials not found, skipping actual post.');
+        logger.info(`Image is available at ${publicImageUrl}`);
+        return 'test_media_id';
+      }
+
+      // Create media container with the image URL
+      const mediaContainerId = await this.createMediaContainer(publicImageUrl, caption);
       logger.info(`Created media container: ${mediaContainerId}`);
 
       // Publish the media

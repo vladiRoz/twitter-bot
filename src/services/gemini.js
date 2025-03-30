@@ -14,8 +14,6 @@ dotenv.config();
 
   const apiKey = process.env.GEMINI_API_KEY;
 
-  logger.info("gemini API Key: " + apiKey);
-
   const genAI = new GoogleGenerativeAI(apiKey);
   
   const model = genAI.getGenerativeModel({

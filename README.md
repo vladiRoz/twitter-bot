@@ -1,90 +1,107 @@
 # Arab Violence Reporting Bot
 
-A Twitter bot that creates daily posts about incidents of violence in Arab countries, using data gathered through the OpenAI API.
+A bot that collects data about violence incidents in Arab countries and shares reports on social media platforms.
 
 ## Features
 
-- Automatically gathers information about violent incidents in Arab countries from the previous day
-- Formats data into a structured JSON format
-- Posts daily summaries to Twitter as thread
-- Saves historical reports in JSON format
+- Data collection using AI (Gemini or OpenAI)
+- Automatic tweet generation
+- Image generation with formatted reports
+- Instagram posting with ImgBB image hosting
 
 ## Setup
 
-1. Clone this repository
-2. Install the required dependencies:
-   ```
-   npm install
-   ```
-3. Create a `.env` file by copying the `.env.example` file:
-   ```
-   cp .env.example .env
-   ```
-4. Add your API keys to the `.env` file:
-   - Get an OpenAI API key from [https://platform.openai.com/](https://platform.openai.com/)
-   - Create a Twitter Developer account and get API keys from [https://developer.twitter.com/](https://developer.twitter.com/)
+### Environment Variables
+
+Create a `.env` file in the root directory with the following variables:
+
+```
+# Twitter API Keys
+TWITTER_API_KEY=your_twitter_api_key
+TWITTER_API_SECRET=your_twitter_api_secret
+TWITTER_ACCESS_TOKEN=your_twitter_access_token
+TWITTER_ACCESS_TOKEN_SECRET=your_twitter_access_token_secret
+
+# OpenAI API Key
+OPENAI_API_KEY=your_openai_api_key
+
+# Gemini API Key
+GEMINI_API_KEY=your_gemini_api_key
+
+# Unsplash API Key
+UNSPLASH_ACCESS_KEY=your_unsplash_access_key
+
+# ImgBB API Key (for image hosting)
+IMGBB_API_KEY=your_imgbb_api_key
+
+# Instagram/Facebook API
+INSTAGRAM_BUSINESS_ACCOUNT_ID=your_instagram_business_account_id
+FACEBOOK_ACCESS_TOKEN=your_facebook_access_token
+```
+
+### ImgBB Setup
+
+To use ImgBB for image hosting:
+
+1. Sign up for a free account at [ImgBB](https://imgbb.com/)
+2. Get your API key from your account settings or via [API page](https://api.imgbb.com/)
+3. Add your API key to the `.env` file as `IMGBB_API_KEY=your_api_key`
+
+### Instagram API Setup
+
+To use the Instagram API:
+
+1. Create a Facebook Developer account
+2. Create a Facebook App
+3. Set up Instagram Basic Display and/or Instagram Graph API
+4. Link your Instagram Business Account
+5. Generate a Page Access Token with the right permissions
+6. Add your Instagram Business Account ID and Facebook Access Token to the `.env` file
+
+## Installation
+
+```bash
+npm install
+```
 
 ## Usage
 
-### Run once manually
+### Generate Report Image Only
 
-```
-npm start
-```
-or
-```
-node bot.js
+```bash
+npm run generate-image
 ```
 
-### Run on a daily schedule
+### Test ImgBB Upload
 
-```
-npm run schedule
-```
-or
-```
-node schedule_bot.js
+```bash
+npm run test:imgbb
 ```
 
-This will run the bot immediately and then schedule it to run every day at 8:00 AM.
+### Twitter Bot
 
-## Data Format
-
-The bot collects and stores data in the following format:
-
-```json
-{
-    "date": "YYYY-MM-DD",
-    "countries": [
-        {
-            "country": "Country name",
-            "death_toll": number or "unknown",
-            "summary": "Brief description of what happened"
-        },
-        ...
-    ]
-}
+```bash
+npm run start:twitter
 ```
 
-Reports are saved in the `reports/` directory with filenames in the format `YYYYMMDD_report.json`.
+### Instagram Bot
 
-## Deployment to DigitalOcean
+```bash
+npm run start:instagram
+```
 
-1. Create a DigitalOcean Droplet with Node.js pre-installed
-2. Clone this repository on your Droplet
-3. Install dependencies with `npm install`
-4. Set up environment variables in `.env`
-5. Use PM2 to keep the scheduler running:
-   ```
-   npm install -g pm2
-   pm2 start schedule_bot.js --name "arab-violence-bot"
-   pm2 save
-   pm2 startup
-   ```
+### Run All
 
-## Notes
+```bash
+npm run start
+```
 
-- The bot uses the GPT-4o model through OpenAI's API to gather and summarize information
-- Daily reports are posted as Twitter threads
-- If no incidents are reported for a day, a single message will be posted stating that no incidents were reported
-- This application is optimized for low resource consumption, making it ideal for small VPS deployments 
+## Output
+
+Generated reports are saved to:
+- JSON reports: `reports/YYYYMMDD_report.json`
+- Image reports: `output/violence_report_YYYYMMDD.jpg`
+
+## License
+
+MIT 
