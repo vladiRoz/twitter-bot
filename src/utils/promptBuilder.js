@@ -1,4 +1,3 @@
-
 function createPrompt(date) {
     return `You are a data collection service that reports on Arab-on-Arab violence. For this task, assume you have access to news sources and can provide data about incidents that occurred yesterday.
 
@@ -21,8 +20,11 @@ function createPrompt(date) {
     3. Don't include Gaza unless violence originated from Arabs/Palestinians/Hamas
     4. Don't include Israel
     5. Respond ONLY with the JSON, no other text
-    6. For this simulation, include at least one incident
+    6. For this simulation, include ALL incidents that occurred, with multiple countries when applicable
     7. if the number is unknown, don't include it.
+    8. don't include countries that have unknown number of deaths.
+    9. don't include more than 5 countries in the response.
+    10. If more than 3 countries are included, make the summary text very brief (maximum 10 words per country).
     
     Example response for no incidents:
     {

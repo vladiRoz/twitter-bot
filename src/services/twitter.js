@@ -274,7 +274,6 @@ async function main() {
 
     // Log the complete data object
     logger.info(`Retrieved data for date: ${violenceData.date}`);
-    logger.info(`Number of countries with incidents: ${violenceData.countries?.length || 0}`);
     
     if (violenceData.error) {
       logger.error(`Error in retrieved data: ${violenceData.error}`);

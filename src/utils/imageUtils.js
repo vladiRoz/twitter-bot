@@ -21,9 +21,7 @@ class ImageUtils {
       headers: {
         'Authorization': `Client-ID ${UNSPLASH_ACCESS_KEY}`
       }
-    });
-    
-    logger.info(`Initialized Unsplash API client with access key: ${UNSPLASH_ACCESS_KEY ? (UNSPLASH_ACCESS_KEY.substring(0, 5) + '...') : 'undefined'}`);
+    }); 
   }
 
   async getRelevantImage(data) {

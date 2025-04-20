@@ -17,7 +17,7 @@ const FACEBOOK_ACCESS_TOKEN = process.env.FACEBOOK_ACCESS_TOKEN;
 class InstagramService {
   constructor() {
     this.baseUrl = 'https://graph.facebook.com/v18.0';
-    logger.info(`Instagram service initialized with account ID: ${INSTAGRAM_BUSINESS_ACCOUNT_ID ? (INSTAGRAM_BUSINESS_ACCOUNT_ID.substring(0, 5) + '...') : 'undefined'}`);
+    logger.info(`Instagram service initialized`);
   }
 
   async createMediaContainer(imageUrl, caption) {

@@ -17,7 +17,7 @@ class ImgurUploader {
     if (!IMGUR_CLIENT_ID) {
       logger.error('Imgur Client ID is missing from environment variables');
     } else {
-      logger.info(`Imgur uploader initialized with Client ID: ${IMGUR_CLIENT_ID.substring(0, 5)}...`);
+      logger.info(`Imgur uploader initialized`);
     }
     
     // Check if we have an access token

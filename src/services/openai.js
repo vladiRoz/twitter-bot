@@ -63,7 +63,6 @@ async function getViolenceData() {
     }
     
     const responseText = response.data.choices[0].message.content;
-    logger.info(`Raw response: ${responseText}`);
     
     // Extract JSON from markdown code blocks if present
     let jsonString = responseText.trim();
