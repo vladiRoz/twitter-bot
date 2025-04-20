@@ -5,7 +5,7 @@ const path = require('path');
 const FormData = require('form-data');
 const { logger } = require('../utils/logger');
 const imageUtils = require('../utils/imageUtils');
-const imgbbUploader = require('../utils/imgbbUploader');
+const imgurUploader = require('../utils/imgurUploader');
 
 // Load environment variables from the root directory
 dotenv.config({ path: path.resolve(__dirname, '../../.env') });
@@ -100,9 +100,13 @@ class InstagramService {
       const imagePath = await imageUtils.createReportImage(data, backgroundImageUrl);
       logger.info(`Created report image at: ${imagePath}`);
 
-      // Upload the image to ImgBB to get a public URL
-      const publicImageUrl = await imgbbUploader.uploadImage(imagePath);
-      logger.info(`Uploaded image to ImgBB: ${publicImageUrl}`);
+      // Upload the image to Imgur to get a public URL
+      const publicImageUrl = await imgurUploader.uploadImageFromFile(
+        imagePath,
+        `Violence Report ${data.date}`,
+        `Report on violence incidents for ${data.date}`
+      );
+      logger.info(`Uploaded image to Imgur: ${publicImageUrl}`);
 
       // Check if we have valid Instagram credentials
       if (!INSTAGRAM_BUSINESS_ACCOUNT_ID || !FACEBOOK_ACCESS_TOKEN) {
@@ -112,6 +116,7 @@ class InstagramService {
       }
 
       // Create media container with the image URL
+      logger.info(`Creating media container with URL: ${publicImageUrl}`);
       const mediaContainerId = await this.createMediaContainer(publicImageUrl, caption);
       logger.info(`Created media container: ${mediaContainerId}`);
 
@@ -120,7 +125,9 @@ class InstagramService {
       logger.info(`Successfully published to Instagram: ${mediaId}`);
 
       // Clean up the temporary image
-      fs.unlinkSync(imagePath);
+      if (imagePath && fs.existsSync(imagePath)) {
+        fs.unlinkSync(imagePath);
+      }
 
       return mediaId;
     } catch (error) {
@@ -129,6 +136,7 @@ class InstagramService {
         logger.error(`API response status: ${error.response.status}`);
         logger.error(`API response data: ${JSON.stringify(error.response.data)}`);
       }
+      
       throw error;
     }
   }

@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
-const { getViolenceData, logger } = require('./services/gemini');
+const { getViolenceData } = require('./services/gemini');
+const { logger } = require('./utils/logger');
 const instagramService = require('./services/instagram');
 
 // Save report to file

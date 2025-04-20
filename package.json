@@ -15,9 +15,11 @@
     "axios": "^1.8.4",
     "date-fns": "^3.3.1",
     "dotenv": "^16.4.5",
+    "express": "^5.1.0",
     "form-data": "^4.0.0",
     "imgbb-uploader": "^1.5.1",
     "jimp": "^0.22.10",
+    "open": "^10.1.1",
     "twitter-lite": "^1.1.0"
   },
   "engines": {

@@ -15,6 +15,7 @@ function createPrompt(date) {
     }
     
     Rules:
+    1. Focus the checks for violence in the next countries only Algeria Egypt Libya Morocco Mauritania Sudan Tunisia Djibouti Somalia Iraq Jordan Lebanon Syria Bahrain Kuwait Oman Qatar Saudi Arabia United Arab Emirates (UAE) Yemen Senegal Mali Niger Chad Gambia Sierra Leone Nigeria Eritrea
     1. Only include Arab countries where incidents occurred
     2. If no incidents occurred, return an empty countries array
     3. Don't include Gaza unless violence originated from Arabs/Palestinians/Hamas
@@ -32,4 +33,4 @@ function createPrompt(date) {
 
 module.exports = {
     createPrompt
-  }; 
+}; 
