@@ -1,8 +1,8 @@
 const fs = require('fs');
 const path = require('path');
-const { getViolenceData, logger } = require('./services/gemini');
-const imageUtils = require('./utils/imageUtils');
-const { getTagString } = require('./utils/tags');
+const { getViolenceData, logger } = require('../services/gemini');
+const imageUtils = require('./imageUtils');
+const { getTagString } = require('./tags');
 
 // Save report to file
 function saveJsonReport(data) {
@@ -69,7 +69,7 @@ async function main() {
     logger.info(`Created and saved report image to: ${imagePath}`);
     
     // Copy image to output directory with date in filename
-    const outputDir = path.join(__dirname, '../output');
+    const outputDir = path.join(__dirname, '../../output');
     if (!fs.existsSync(outputDir)) {
       fs.mkdirSync(outputDir);
     }
@@ -88,4 +88,9 @@ async function main() {
 // Run the main function if this script is run directly
 if (require.main === module) {
   main();
-} 
+}
+
+module.exports = {
+  generateCaption,
+  main
+}; 

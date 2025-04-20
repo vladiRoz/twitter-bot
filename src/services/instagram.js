@@ -5,7 +5,7 @@ const path = require('path');
 const FormData = require('form-data');
 const { logger } = require('../utils/logger');
 const imageUtils = require('../utils/imageUtils');
-const imgurUploader = require('../utils/imgurUploader');
+const imgurUploader = require('../utils/imgur/imgurUploader');
 const { getTagString } = require('../utils/tags');
 
 // Load environment variables from the root directory
