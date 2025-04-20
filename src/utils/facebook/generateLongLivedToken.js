@@ -60,7 +60,7 @@ async function generateLongLivedToken() {
     };
 
     fs.writeFileSync(
-      path.resolve(__dirname, '../../facebook_token.json'), 
+      path.resolve(__dirname, '../../../facebook_token.json'), 
       JSON.stringify(tokenInfo, null, 2)
     );
     
