@@ -9,7 +9,7 @@
     "start:instagram": "node src/instagram-bot.js",
     "generate-image": "node src/image-generator.js",
     "test:imgbb": "node src/test-imgbb.js",
-    "refresh-facebook-token": "node src/utils/refreshFacebookToken.js"
+    "refresh-facebook-token": "node src/utils/facebook/refreshFacebookToken.js"
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.0",

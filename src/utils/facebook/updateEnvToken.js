@@ -1,10 +1,10 @@
 const fs = require('fs');
 const path = require('path');
-const { logger } = require('./logger');
+const { logger } = require('../logger');
 
 function updateEnvToken() {
-  const tokenFilePath = path.resolve(__dirname, '../../facebook_token.json');
-  const envFilePath = path.resolve(__dirname, '../../.env');
+  const tokenFilePath = path.resolve(__dirname, '../../../facebook_token.json');
+  const envFilePath = path.resolve(__dirname, '../../../.env');
 
   try {
     // Check if env file exists

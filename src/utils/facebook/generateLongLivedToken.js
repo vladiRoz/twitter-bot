@@ -2,10 +2,10 @@ const axios = require('axios');
 const dotenv = require('dotenv');
 const path = require('path');
 const fs = require('fs');
-const { logger } = require('./logger');
+const { logger } = require('../logger');
 
 // Load environment variables from the root directory
-dotenv.config({ path: path.resolve(__dirname, '../../.env') });
+dotenv.config({ path: path.resolve(__dirname, '../../../.env') });
 
 // Required environment variables
 const FACEBOOK_APP_ID = process.env.FACEBOOK_APP_ID;

@@ -1,6 +1,6 @@
 const { generateLongLivedToken } = require('./generateLongLivedToken');
 const { updateEnvToken } = require('./updateEnvToken');
-const { logger } = require('./logger');
+const { logger } = require('../logger');
 
 async function refreshFacebookToken() {
   try {
