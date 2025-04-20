@@ -1,4 +1,4 @@
-# Arab Violence Reporting Bot
+# Arab World Violence Reporting Bot
 
 A bot that collects data about violence incidents in Arab countries and shares reports on social media platforms.
 
@@ -8,6 +8,7 @@ A bot that collects data about violence incidents in Arab countries and shares r
 - Automatic tweet generation
 - Image generation with formatted reports
 - Instagram posting with ImgBB image hosting
+- Date format: DD-MM-YYYY
 
 ## Setup
 
@@ -99,8 +100,8 @@ npm run start
 ## Output
 
 Generated reports are saved to:
-- JSON reports: `reports/YYYYMMDD_report.json`
-- Image reports: `output/violence_report_YYYYMMDD.jpg`
+- JSON reports: `reports/DDMMYYYY_report.json`
+- Image reports: `output/violence_report_DDMMYYYY.jpg`
 
 ## License
 

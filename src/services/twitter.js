@@ -48,7 +48,7 @@ async function getViolenceData() {
   try {
     // Calculate yesterday's date
     const yesterday = subDays(new Date(), 1);
-    const yesterdayFormatted = format(yesterday, 'yyyy-MM-dd');
+    const yesterdayFormatted = format(yesterday, 'dd-MM-yyyy');
     
     const prompt = `
     target: find sources of death tolls of Arab-on-Arab violence only yesterday.
@@ -149,7 +149,7 @@ async function getViolenceData() {
     }
     
     const yesterday = subDays(new Date(), 1);
-    const yesterdayFormatted = format(yesterday, 'yyyy-MM-dd');
+    const yesterdayFormatted = format(yesterday, 'dd-MM-yyyy');
     return {
       date: yesterdayFormatted,
       countries: [],
@@ -175,7 +175,7 @@ async function postToTwitter(data) {
 
     // Handle case with no incidents
     if (!data.countries || data.countries.length === 0) {
-      const message = `📊 Violence Report for ${data.date}\n\nNo incidents of violence reported today.`;
+      const message = `📊 Arab World Violence Report for ${data.date}\n\nNo incidents of violence reported today.`;
       logger.info('Posting message:', message);
       
       const response = await client.post('tweets', {
@@ -191,7 +191,7 @@ async function postToTwitter(data) {
     }
 
     // Construct message for cases with incidents
-    let message = `📊 Violence Report for ${data.date}\n\n`;
+    let message = `📊 Arab World Violence Report for ${data.date}\n\n`;
     
     data.countries.forEach(country => {
       const countryName = country.name || country.country; // Handle both name formats
@@ -216,7 +216,7 @@ async function postToTwitter(data) {
       }, 0);
       const avgCasualties = Math.round(totalCasualties / totalCountries);
       
-      message = `📊 Violence Report for ${data.date}\n\n`;
+      message = `📊 Arab World Violence Report for ${data.date}\n\n`;
       message += `${totalCountries} countries affected\n`;
       message += `Total casualties: ${totalCasualties}\n`;
       message += `Average casualties per country: ${avgCasualties}\n\n`;

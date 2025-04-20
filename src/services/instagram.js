@@ -64,7 +64,7 @@ class InstagramService {
   }
 
   generateCaption(data) {
-    let caption = `🔴 Violence Report for ${data.date}\n\n`;
+    let caption = `🔴 Arab World Violence Report for ${data.date}\n\n`;
     
     if (data.countries && data.countries.length > 0) {
       data.countries.forEach(country => {
@@ -103,7 +103,7 @@ class InstagramService {
       // Upload the image to Imgur to get a public URL
       const publicImageUrl = await imgurUploader.uploadImageFromFile(
         imagePath,
-        `Violence Report ${data.date}`,
+        `Arab World Violence Report ${data.date}`,
         `Report on violence incidents for ${data.date}`
       );
       logger.info(`Uploaded image to Imgur: ${publicImageUrl}`);

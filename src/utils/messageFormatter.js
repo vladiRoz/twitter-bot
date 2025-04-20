@@ -10,13 +10,13 @@ function formatMessage(data) {
   // Handle case with no incidents
   if (!data.countries || data.countries.length === 0) {
     return {
-      full: `📊 Violence Report for ${data.date}\n\nNo incidents of violence reported today.`,
+      full: `📊 Arab World Violence Report for ${data.date}\n\nNo incidents of violence reported today.`,
       summary: null
     };
   }
 
   // Construct full message
-  let fullMessage = `📊 Violence Report for ${data.date}\n\n`;
+  let fullMessage = `📊 Arab World Violence Report for ${data.date}\n\n`;
   
   data.countries.forEach(country => {
     const countryName = country.name || country.country;
@@ -42,7 +42,7 @@ function formatMessage(data) {
     }, 0);
     const avgCasualties = Math.round(totalCasualties / totalCountries);
     
-    summaryMessage = `📊 Violence Report for ${data.date}\n\n`;
+    summaryMessage = `📊 Arab World Violence Report for ${data.date}\n\n`;
     summaryMessage += `${totalCountries} countries affected\n`;
     summaryMessage += `Total casualties: ${totalCasualties}\n`;
     summaryMessage += `Average casualties per country: ${avgCasualties}\n\n`;

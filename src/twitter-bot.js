@@ -45,7 +45,7 @@ function formatTweet(data) {
   }
   
   // Format the full message with all details
-  let message = `Arab-on-Arab Violence Report for ${date}:\n\n`;
+  let message = `Arab World Violence Report for ${date}:\n\n`;
   
   // Format each country's data
   countries.forEach(country => {
@@ -67,7 +67,7 @@ function formatTweet(data) {
     
     const avgDeaths = Math.round(totalDeaths / totalCountries);
     
-    summaryMessage = `Arab-on-Arab Violence Report for ${date}:\n\n`;
+    summaryMessage = `Arab World Violence Report for ${date}:\n\n`;
     summaryMessage += `${totalCountries} countries affected with a total of ${totalDeaths} casualties (avg: ${avgDeaths} per country).\n\n`;
     summaryMessage += '#ArabViolence';
   }

@@ -23,7 +23,7 @@ function saveJsonReport(data) {
 
 // Generate caption text
 function generateCaption(data) {
-  let caption = `🔴 Violence Report for ${data.date}\n\n`;
+  let caption = `🔴 Arab World Violence Report for ${data.date}\n\n`;
   
   if (data.countries && data.countries.length > 0) {
     data.countries.forEach(country => {

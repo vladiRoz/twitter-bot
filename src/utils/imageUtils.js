@@ -85,7 +85,7 @@ class ImageUtils {
       const summaryFont = await Jimp.loadFont(Jimp.FONT_SANS_32_WHITE); // Larger for summary
       
       // Title
-      const title = "Violence Report";
+      const title = "Arab World Violence Report";
       const titleWidth = Jimp.measureText(titleFont, title);
       backgroundImage.print(titleFont, (width - titleWidth) / 2, 100, title);
       

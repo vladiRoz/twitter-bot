@@ -33,7 +33,7 @@ dotenv.config();
   async function getViolenceData() {
     try {
       const yesterday = subDays(new Date(), 1);
-      const yesterdayFormatted = format(yesterday, 'yyyy-MM-dd');
+      const yesterdayFormatted = format(yesterday, 'dd-MM-yyyy');
       
       const prompt = createPrompt(yesterdayFormatted);
       
@@ -49,7 +49,7 @@ dotenv.config();
           {
             role: "model",
             parts: [
-              {text: "```json\n{\n    \"date\": \"2024-02-29\",\n    \"countries\": [\n        {\n            \"country\": \"Lebanon\",\n            \"death_toll\": 2,\n            \"summary\": \"Clashes erupted between rival factions in a Palestinian refugee camp near Tyre, resulting in casualties. The fighting involved the use of small arms and explosives.\"\n        },\n        {\n            \"country\": \"Iraq\",\n            \"death_toll\": 3,\n            \"summary\": \"Sectarian violence in Baghdad led to casualties in a marketplace bombing. Security forces have increased patrols in the affected areas.\"\n        },\n        {\n            \"country\": \"Yemen\",\n            \"death_toll\": \"unknown\",\n            \"summary\": \"Ongoing tribal conflicts in the central region resulted in multiple casualties and property damage.\"\n        }\n    ]\n}\n```"},
+              {text: "```json\n{\n    \"date\": \"29-02-2024\",\n    \"countries\": [\n        {\n            \"country\": \"Lebanon\",\n            \"death_toll\": 2,\n            \"summary\": \"Clashes erupted between rival factions in a Palestinian refugee camp near Tyre, resulting in casualties. The fighting involved the use of small arms and explosives.\"\n        },\n        {\n            \"country\": \"Iraq\",\n            \"death_toll\": 3,\n            \"summary\": \"Sectarian violence in Baghdad led to casualties in a marketplace bombing. Security forces have increased patrols in the affected areas.\"\n        },\n        {\n            \"country\": \"Yemen\",\n            \"death_toll\": \"unknown\",\n            \"summary\": \"Ongoing tribal conflicts in the central region resulted in multiple casualties and property damage.\"\n        }\n    ]\n}\n```"},
             ],
           },
           {
@@ -61,7 +61,7 @@ dotenv.config();
           {
             role: "model",
             parts: [
-              {text: "```json\n{\n    \"date\": \"2025-03-28\",\n    \"countries\": [\n        {\n            \"country\": \"Yemen\",\n            \"death_toll\": 5,\n            \"summary\": \"Fighting in Marib between rival factions.\"\n        },\n        {\n            \"country\": \"Syria\",\n            \"death_toll\": 7,\n            \"summary\": \"Militant clashes in Idlib caused civilian casualties.\"\n        },\n        {\n            \"country\": \"Sudan\",\n            \"death_toll\": 4,\n            \"summary\": \"Tribal violence in Darfur region.\"\n        },\n        {\n            \"country\": \"Iraq\",\n            \"death_toll\": 3,\n            \"summary\": \"Sectarian bombing in southern marketplace.\"\n        }\n    ]\n}\n```"},
+              {text: "```json\n{\n    \"date\": \"28-03-2025\",\n    \"countries\": [\n        {\n            \"country\": \"Yemen\",\n            \"death_toll\": 5,\n            \"summary\": \"Fighting in Marib between rival factions.\"\n        },\n        {\n            \"country\": \"Syria\",\n            \"death_toll\": 7,\n            \"summary\": \"Militant clashes in Idlib caused civilian casualties.\"\n        },\n        {\n            \"country\": \"Sudan\",\n            \"death_toll\": 4,\n            \"summary\": \"Tribal violence in Darfur region.\"\n        },\n        {\n            \"country\": \"Iraq\",\n            \"death_toll\": 3,\n            \"summary\": \"Sectarian bombing in southern marketplace.\"\n        }\n    ]\n}\n```"},
             ],
           },
         ],
@@ -100,7 +100,7 @@ dotenv.config();
       logger.error(`Error querying Gemini API: ${error.message}`);
       
       const yesterday = subDays(new Date(), 1);
-      const yesterdayFormatted = format(yesterday, 'yyyy-MM-dd');
+      const yesterdayFormatted = format(yesterday, 'dd-MM-yyyy');
       return {
         date: yesterdayFormatted,
         countries: [],
