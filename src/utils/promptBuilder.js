@@ -24,7 +24,7 @@ function createPrompt(date) {
     7. if the number is unknown, don't include it.
     8. don't include countries that have unknown number of deaths.
     9. don't include more than 5 countries in the response.
-    10. If more than 3 countries are included, make the summary text very brief (maximum 10 words per country).
+    10. If more than 3 countries are included, make the summary text very brief (maximum 20 words per country).
     
     Example response for no incidents:
     {

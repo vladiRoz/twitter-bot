@@ -33,21 +33,28 @@ class ImageUtils {
       
       // Use country name for a more relevant search if available
       const searchTerm = data && data.countries && data.countries.length > 0 
-        ? `${data.countries[0].country} news` 
+        ? `${data.countries[0].country}` 
         : 'typewriter news journalism';
       
       logger.info(`Searching Unsplash for: ${searchTerm}`);
       
-      // Search for relevant photos
-      const response = await this.unsplashApi.get('/photos/random', {
+      // Search for relevant photos related to the country
+      const response = await this.unsplashApi.get('/search/photos', {
         params: {
           query: searchTerm,
-          orientation: 'squarish'
+          orientation: 'squarish',
+          per_page: 1
         }
       });
       
-      logger.info(`Got background image from Unsplash: ${response.data.urls.regular.substring(0, 50)}...`);
-      return response.data.urls.regular;
+      // Get the first result or use fallback if no results
+      if (response.data.results && response.data.results.length > 0) {
+        logger.info(`Got background image from Unsplash: ${response.data.results[0].urls.regular.substring(0, 50)}...`);
+        return response.data.results[0].urls.regular;
+      } else {
+        logger.warn(`No images found for ${searchTerm}, using fallback`);
+        return 'https://images.unsplash.com/photo-1585829365295-ab7cd400c167';
+      }
     } catch (error) {
       logger.error('Error fetching image from Unsplash:', error);
       // Return a fallback image URL if the request fails

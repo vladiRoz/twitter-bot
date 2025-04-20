@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const { getViolenceData, logger } = require('./services/gemini');
 const imageUtils = require('./utils/imageUtils');
+const { getTagString } = require('./utils/tags');
 
 // Save report to file
 function saveJsonReport(data) {
@@ -35,7 +36,7 @@ function generateCaption(data) {
     caption += 'No incidents reported today.';
   }
   
-  caption += '\n#ArabViolence #NewsReport #Peace';
+  caption += '\n' + getTagString();
   return caption;
 }
 

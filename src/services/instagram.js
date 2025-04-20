@@ -6,6 +6,7 @@ const FormData = require('form-data');
 const { logger } = require('../utils/logger');
 const imageUtils = require('../utils/imageUtils');
 const imgurUploader = require('../utils/imgurUploader');
+const { getTagString } = require('../utils/tags');
 
 // Load environment variables from the root directory
 dotenv.config({ path: path.resolve(__dirname, '../../.env') });
@@ -76,7 +77,7 @@ class InstagramService {
       caption += 'No incidents reported today.';
     }
     
-    caption += '\n#ArabViolence #NewsReport #Peace';
+    caption += '\n' + getTagString();
     return caption;
   }
 
