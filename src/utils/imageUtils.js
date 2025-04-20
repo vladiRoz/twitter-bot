@@ -159,11 +159,22 @@ class ImageUtils {
       "Morocco": "🇲🇦",
       "Saudi Arabia": "🇸🇦",
       "UAE": "🇦🇪",
+      "United Arab Emirates": "🇦🇪",
       "Qatar": "🇶🇦",
       "Bahrain": "🇧🇭",
       "Oman": "🇴🇲",
       "Kuwait": "🇰🇼",
-      "Jordan": "🇯🇴"
+      "Jordan": "🇯🇴",
+      "Mauritania": "🇲🇷",
+      "Djibouti": "🇩🇯",
+      "Senegal": "🇸🇳",
+      "Mali": "🇲🇱",
+      "Niger": "🇳🇪",
+      "Chad": "🇹🇩",
+      "Gambia": "🇬🇲",
+      "Sierra Leone": "🇸🇱",
+      "Nigeria": "🇳🇬",
+      "Eritrea": "🇪🇷"
     };
     
     return flagMap[countryName] || "🌍";
