@@ -1,0 +1,18 @@
+[Unit]
+Description=Palimirror Arab Violence Reporting Bot Scheduler
+After=network.target
+
+[Service]
+Type=simple
+User=YOUR_USERNAME
+WorkingDirectory=/path/to/palimirror
+ExecStart=/usr/bin/node schedule_bot.js
+Restart=on-failure
+RestartSec=10
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=palimirror-scheduler
+Environment=NODE_ENV=production
+
+[Install]
+WantedBy=multi-user.target 

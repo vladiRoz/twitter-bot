@@ -7,9 +7,12 @@
     "start": "node src/index.js",
     "start:twitter": "node src/twitter-bot.js",
     "start:instagram": "node src/instagram-bot.js",
-    "generate-image": "node src/image-generator.js",
+    "schedule": "node schedule_bot.js",
+    "schedule:dev": "RUN_ON_START=true node schedule_bot.js",
+    "generate-image": "node src/utils/image-generator.js",
     "test:imgbb": "node src/test-imgbb.js",
-    "refresh-facebook-token": "node src/utils/facebook/refreshFacebookToken.js"
+    "refresh-facebook-token": "node src/utils/facebook/refreshFacebookToken.js",
+    "auth:imgur": "node src/utils/imgur/imgur-auth.js"
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.0",
@@ -20,6 +23,7 @@
     "form-data": "^4.0.0",
     "imgbb-uploader": "^1.5.1",
     "jimp": "^0.22.10",
+    "node-schedule": "^2.1.1",
     "open": "^10.1.1",
     "twitter-lite": "^1.1.0"
   },
