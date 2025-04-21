@@ -49,7 +49,7 @@ class ImageUtils {
       
       // Get the first result or use fallback if no results
       if (response.data.results && response.data.results.length > 0) {
-        logger.info(`Got background image from Unsplash: ${response.data.results[0].urls.regular.substring(0, 50)}...`);
+        logger.info(`Got background image from Unsplash: ${response.data.results[0].urls.regular}`);
         return response.data.results[0].urls.regular;
       } else {
         logger.warn(`No images found for ${searchTerm}, using fallback`);
