@@ -9,6 +9,8 @@
     "start:instagram": "node src/instagram-bot.js",
     "schedule": "node schedule_bot.js",
     "schedule:dev": "RUN_ON_START=true node schedule_bot.js",
+    "schedule:token": "node facebook-token-scheduler.js",
+    "schedule:token:dev": "RUN_ON_START=true node facebook-token-scheduler.js",
     "generate-image": "node src/utils/image-generator.js",
     "test:imgbb": "node src/test-imgbb.js",
     "refresh-facebook-token": "node src/utils/facebook/refreshFacebookToken.js",

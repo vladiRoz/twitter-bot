@@ -82,6 +82,93 @@ Long-lived tokens are valid for approximately 60 days. Make sure to refresh your
 
 Set up a calendar reminder to run the refresh script again before the expiration date shown when you generate the token.
 
+## Automated Token Refresh
+
+To avoid manual token refreshing, a scheduler has been created that will automatically refresh your Facebook token every 2 months (before the 60-day expiration).
+
+### Running the Token Refresh Scheduler
+
+#### Development Mode
+
+To run the token refresh scheduler in development mode with immediate execution:
+
+```bash
+npm run schedule:token:dev
+```
+
+This will:
+- Start the scheduler
+- Refresh your Facebook token immediately
+- Schedule future token refreshes on the 1st day of every other month at 7:00 AM
+- Also check the token's expiration daily at 9:00 AM and refresh if it's about to expire
+
+#### Production Mode
+
+To run the token refresh scheduler in production mode (no immediate execution):
+
+```bash
+npm run schedule:token
+```
+
+This will:
+- Start the scheduler
+- Schedule token refreshes on the 1st day of every other month at 7:00 AM
+- Check the token's expiration daily at 9:00 AM
+
+### Production Deployment with systemd
+
+For a production server, you can set up the token refresh scheduler as a systemd service:
+
+1. Edit the `facebook-token-scheduler.service` file:
+
+   ```bash
+   nano facebook-token-scheduler.service
+   ```
+
+2. Update the following values:
+   - `User`: Your system username
+   - `WorkingDirectory`: Full path to the project directory
+
+3. Copy the service file to the systemd directory:
+
+   ```bash
+   sudo cp facebook-token-scheduler.service /etc/systemd/system/
+   ```
+
+4. Reload systemd to recognize the new service:
+
+   ```bash
+   sudo systemctl daemon-reload
+   ```
+
+5. Enable the service to start on boot:
+
+   ```bash
+   sudo systemctl enable facebook-token-scheduler.service
+   ```
+
+6. Start the service:
+
+   ```bash
+   sudo systemctl start facebook-token-scheduler.service
+   ```
+
+7. Check the status:
+
+   ```bash
+   sudo systemctl status facebook-token-scheduler.service
+   ```
+
+### Logs
+
+The token refresh scheduler logs all activities to `facebook-token-scheduler.log` in the project root directory.
+
+When running as a systemd service, you can also view logs using:
+
+```bash
+sudo journalctl -u facebook-token-scheduler.service -f
+```
+
 ## Troubleshooting
 
 If you encounter errors:
