@@ -75,12 +75,11 @@ class ImageUtils {
       // Resize and crop the background image to fit Instagram dimensions
       backgroundImage.cover(width, height);
 
-      // Add a semi-transparent overlay to improve text readability
-      backgroundImage.brightness(-0.5); // Darken the image significantly
-      backgroundImage.contrast(0.3);    // Increase contrast more
-
-      // Add a more opaque black overlay to improve text readability
-      const overlay = await new Jimp(width, height, 0x000000A0); // 60% transparent black
+      // Apply subtle adjustments - just enough for comfortable text readability
+      backgroundImage.brightness(-0.2);  // Slightly darken (was -0.1)
+      
+      // Add a light overlay - subtle but sufficient for text contrast
+      const overlay = await new Jimp(width, height, 0x00000040); // 25% opacity (was 19%)
       backgroundImage.composite(overlay, 0, 0);
       
       // Load fonts with larger sizes for better readability
