@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const FormData = require('form-data');
 const dotenv = require('dotenv');
-const { logger } = require('../logger');
+const { logger } = require('../../logger');
 
 // Load environment variables from the root directory
 dotenv.config({ path: path.resolve(__dirname, '../../../.env') });

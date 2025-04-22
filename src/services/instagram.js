@@ -5,7 +5,7 @@ const path = require('path');
 const FormData = require('form-data');
 const { logger } = require('../utils/logger');
 const imageUtils = require('../utils/imageUtils');
-const imgurUploader = require('../utils/imgur/imgurUploader');
+const { getImageUploader } = require('../utils/cdn');
 const { getTagString } = require('../utils/tags');
 
 // Load environment variables from the root directory
@@ -101,13 +101,16 @@ class InstagramService {
       const imagePath = await imageUtils.createReportImage(data, backgroundImageUrl);
       logger.info(`Created report image at: ${imagePath}`);
 
-      // Upload the image to Imgur to get a public URL
-      const publicImageUrl = await imgurUploader.uploadImageFromFile(
+      // Get the preferred image uploader
+      const imageUploader = getImageUploader();
+
+      // Upload the image to get a public URL
+      const publicImageUrl = await imageUploader.uploadImageFromFile(
         imagePath,
         `Arab World Violence Report ${data.date}`,
         `Report on violence incidents for ${data.date}`
       );
-      logger.info(`Uploaded image to Imgur: ${publicImageUrl}`);
+      logger.info(`Uploaded image: ${publicImageUrl}`);
 
       // Check if we have valid Instagram credentials
       if (!INSTAGRAM_BUSINESS_ACCOUNT_ID || !FACEBOOK_ACCESS_TOKEN) {
