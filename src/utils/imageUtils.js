@@ -42,7 +42,6 @@ class ImageUtils {
       const response = await this.unsplashApi.get('/search/photos', {
         params: {
           query: searchTerm,
-          orientation: 'squarish',
           per_page: 1
         }
       });
