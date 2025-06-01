@@ -90,12 +90,12 @@ class ImageUtils {
       const summaryFont = await Jimp.loadFont(Jimp.FONT_SANS_32_WHITE); // Larger for summary
       
       // Title
-      const title = "Arab World Violence Report";
+      const title = "Why do you ignore us?";
       const titleWidth = Jimp.measureText(titleFont, title);
       backgroundImage.print(titleFont, (width - titleWidth) / 2, 100, title);
       
       // Date
-      const date = `for ${data.date}`;
+      const date = `${data.date}`;
       const dateWidth = Jimp.measureText(dateFont, date);
       backgroundImage.print(dateFont, (width - dateWidth) / 2, 180, date);
       
